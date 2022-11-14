@@ -1,6 +1,20 @@
 const express = require('express')
 const router = express.Router()
 
+
+/**
+ * Ajout notion immutabilité dans le projet
+ * ajout variable global jsonVoiture.
+*Utilisation de const pour déclarer la variable jsonVoiture car elle ne sera pas modifiée. (Immutable)
+*/
+const jsonVoiture = [
+    { id: 1, libelle: 'Ford', prix: 10000 },
+    { id: 20, libelle: 'Mercedes', prix: 20000 },
+    { id: 21, libelle: 'Mercedes', prix: 20500 },
+    { id: 7, libelle: 'Ferrari', prix: 30000 },
+    { id: 8, libelle: 'Ferrari', prix: 40000 }
+];
+
 /**
  * Fonction pure: 
  * Une fonction sans effet de bord (side effect).
@@ -94,26 +108,12 @@ function filterByMarqueOrPrice(json, value, callback) {
 // voiture/
 router.get('/', function (req, res) {
 
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
-
     res.json(jsonVoiture);
 
 })
 
 // voiture/maj
 router.get('/maj', function (req, res) {
-
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
 
     //Appel de la fonction pure libelleToUpperCase
     res.json(libelleToUpperCase(jsonVoiture));
@@ -123,13 +123,6 @@ router.get('/maj', function (req, res) {
 // voiture/min
 router.get('/min', function (req, res) {
 
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
-
     //Appel de la fonction pure libelleTolowerCase
     res.json(libelleTolowerCase(jsonVoiture));
 
@@ -137,13 +130,6 @@ router.get('/min', function (req, res) {
 
 // voiture/filtre/:prix
 router.get('/filtre/:prix', function (req, res) {
-
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
 
     //Appel de la fonction d’ordre supérieur: filterByPrice
     res.json(filterByPrice(jsonVoiture, req.params.prix));
@@ -153,13 +139,6 @@ router.get('/filtre/:prix', function (req, res) {
 // voiture/filtre/marque/:marque
 router.get('/filtre/marque/:marque', function (req, res) {
 
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
-
     //Appel de la fonction d’ordre supérieur: filterByMarqueOrPrice
     res.json(filterByMarqueOrPrice(jsonVoiture, req.params.marque, filterByMarque));
 
@@ -167,13 +146,6 @@ router.get('/filtre/marque/:marque', function (req, res) {
 
 // voiture/filtre/prix/:prix
 router.get('/filtre/prix/:prix', function (req, res) {
-
-    let jsonVoiture = [
-        { id: 1, libelle: 'Ford', prix: 10000 },
-        { id: 20, libelle: 'Mercedes', prix: 20000 },
-        { id: 21, libelle: 'Mercedes', prix: 20000 },
-        { id: 7, libelle: 'Ferrari', prix: 30000 }
-    ];
 
     //Appel de la fonction d’ordre supérieur: filterByMarqueOrPrice
     res.json(filterByMarqueOrPrice(jsonVoiture, req.params.prix, filterByPrice));
