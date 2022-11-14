@@ -39,6 +39,22 @@ function libelleTolowerCase(json) {
 
 }
 
+/**
+ * Fonctions d’ordre supérieur:
+* Une fonction qui prend en paramètre une fonction et/ou qui renvoie une fonction.
+* @param {*} json
+* @param {*} prix
+* @returns json_format
+*/
+function filterByPrice(json, prix) {
+
+    //Filtrer les voitures selon le prix.
+    return json.filter(function (voiture) {
+        return voiture.prix <= prix;
+    });
+
+}
+
 // voiture/
 router.get('/', function (req, res) {
 
@@ -77,6 +93,20 @@ router.get('/min', function (req, res) {
 
     //Appel de la fonction pure libelleTolowerCase
     res.json(libelleTolowerCase(jsonVoiture));
+
+})
+
+// voiture/filtre/:prix
+router.get('/filtre/:prix', function (req, res) {
+
+    let jsonVoiture = [
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
+    ];
+
+    //Appel de la fonction d’ordre supérieur: filterByPrice
+    res.json(filterByPrice(jsonVoiture, req.params.prix));
 
 })
 
