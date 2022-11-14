@@ -12,12 +12,11 @@ const router = express.Router()
 function libelleToUpperCase(json) {
 
     //Convertion des valeurs en majuscule.
-    result = json.map(v => {
-        v.libelle = v.libelle.toUpperCase();
-        return v;
-    });
+    for (let i = 0; i < json.length; i++) {
+        json[i].libelle = json[i].libelle.toUpperCase();
+    }
 
-    return result;
+    return json;
 
 }
 
@@ -32,12 +31,11 @@ function libelleToUpperCase(json) {
 function libelleTolowerCase(json) {
 
     //Convertion des valeurs en miniscule.
-    result = json.map(v => {
-        v.libelle = v.libelle.toLowerCase();
-        return v;
-    });
+    for (let i = 0; i < json.length; i++) {
+        json[i].libelle = json[i].libelle.toLowerCase();
+    }
 
-    return result;
+    return json;
 
 }
 
@@ -45,9 +43,9 @@ function libelleTolowerCase(json) {
 router.get('/', function (req, res) {
 
     let jsonVoiture = [
-        { id: 1, libelle: 'Ford' },
-        { id: 20, libelle: 'Mercedes' },
-        { id: 7, libelle: 'Ferrari' }
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
     res.json(jsonVoiture);
@@ -58,9 +56,9 @@ router.get('/', function (req, res) {
 router.get('/maj', function (req, res) {
 
     let jsonVoiture = [
-        { id: 1, libelle: 'Ford' },
-        { id: 20, libelle: 'Mercedes' },
-        { id: 7, libelle: 'Ferrari' }
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
     //Appel de la fonction pure libelleToUpperCase
@@ -72,9 +70,9 @@ router.get('/maj', function (req, res) {
 router.get('/min', function (req, res) {
 
     let jsonVoiture = [
-        { id: 1, libelle: 'Ford' },
-        { id: 20, libelle: 'Mercedes' },
-        { id: 7, libelle: 'Ferrari' }
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
     //Appel de la fonction pure libelleTolowerCase
