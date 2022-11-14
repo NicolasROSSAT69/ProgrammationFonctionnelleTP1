@@ -55,12 +55,43 @@ function filterByPrice(json, prix) {
 
 }
 
+/**
+ * Fonction qui filtre les voitures selon la marque.
+ * @param {*} json
+ * @param {*} marque
+ * @returns json_format
+*/
+function filterByMarque(json, marque) {
+
+    //Filtrer les voitures selon la marque.
+    return json.filter(function (voiture) {
+        return voiture.libelle === marque;
+    });
+
+}
+
+/**
+ * Fonctions d’ordre supérieur:
+* Une fonction qui prend en paramètre une fonction et/ou qui renvoie une fonction.
+* @param {*} json
+* @param {*} value
+* @param {*} callback
+* @returns json_format
+*/
+function filterByMarqueOrPrice(json, value, callback) {
+
+    //appelle la fonction callback
+    return callback(json, value);
+
+}
+
 // voiture/
 router.get('/', function (req, res) {
 
     let jsonVoiture = [
         { id: 1, libelle: 'Ford', prix: 10000 },
         { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
         { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
@@ -74,6 +105,7 @@ router.get('/maj', function (req, res) {
     let jsonVoiture = [
         { id: 1, libelle: 'Ford', prix: 10000 },
         { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
         { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
@@ -88,6 +120,7 @@ router.get('/min', function (req, res) {
     let jsonVoiture = [
         { id: 1, libelle: 'Ford', prix: 10000 },
         { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
         { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
@@ -102,11 +135,42 @@ router.get('/filtre/:prix', function (req, res) {
     let jsonVoiture = [
         { id: 1, libelle: 'Ford', prix: 10000 },
         { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
         { id: 7, libelle: 'Ferrari', prix: 30000 }
     ];
 
     //Appel de la fonction d’ordre supérieur: filterByPrice
     res.json(filterByPrice(jsonVoiture, req.params.prix));
+
+})
+
+// voiture/filtre/marque/:marque
+router.get('/filtre/marque/:marque', function (req, res) {
+
+    let jsonVoiture = [
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
+    ];
+
+    //Appel de la fonction d’ordre supérieur: filterByMarqueOrPrice
+    res.json(filterByMarqueOrPrice(jsonVoiture, req.params.marque, filterByMarque));
+
+})
+
+// voiture/filtre/prix/:prix
+router.get('/filtre/prix/:prix', function (req, res) {
+
+    let jsonVoiture = [
+        { id: 1, libelle: 'Ford', prix: 10000 },
+        { id: 20, libelle: 'Mercedes', prix: 20000 },
+        { id: 21, libelle: 'Mercedes', prix: 20000 },
+        { id: 7, libelle: 'Ferrari', prix: 30000 }
+    ];
+
+    //Appel de la fonction d’ordre supérieur: filterByMarqueOrPrice
+    res.json(filterByMarqueOrPrice(jsonVoiture, req.params.prix, filterByPrice));
 
 })
 
