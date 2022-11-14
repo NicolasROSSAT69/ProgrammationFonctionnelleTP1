@@ -6,6 +6,9 @@ const router = express.Router()
  * Une fonction sans effet de bord (side effect).
  * S’occupe uniquement de renvoyer une valeur
  * Ne dépend que de ses paramètres d’entrée.
+ * * Cette fonction est aussi idempotente.
+ * car elle renvoie toujours la même valeur pour les mêmes paramètres.
+ * nous pouvons l'appeler autant de fois que l'on veut le résultat sera toujours le même.
  * @param {*} json 
  * @returns json_format
  */
@@ -25,6 +28,9 @@ function libelleToUpperCase(json) {
  * Une fonction sans effet de bord (side effect).
  * S’occupe uniquement de renvoyer une valeur
  * Ne dépend que de ses paramètres d’entrée.
+ * Cette fonction est aussi idempotente.
+ * car elle renvoie toujours la même valeur pour les mêmes paramètres.
+ * nous pouvons l'appeler autant de fois que l'on veut le résultat sera toujours le même.
  * @param {*} json 
  * @returns json_format
  */
