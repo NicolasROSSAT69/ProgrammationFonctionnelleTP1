@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 
 
+//------------SEPARATION DOMAINE PUR------------
+
 /**
  * Ajout notion immutabilité dans le projet
  * ajout variable global jsonVoiture.
@@ -34,7 +36,6 @@ function libelleToUpperCase(json) {
     }
 
     return json;
-
 }
 
 /**
@@ -58,6 +59,36 @@ function libelleTolowerCase(json) {
     return json;
 
 }
+
+/**
+* Fonctions reprenant l'immutabilité:
+* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
+Fonction qui filtre les voitures selon l'année.
+@param {*} json
+@param {*} annee
+@returns json_format
+*/
+function filterByYear(json, annee) {
+    return json.filter(function (voiture) {
+        return voiture.annee === annee;
+    });
+}
+
+/**
+* Fonctions reprenant l'immutabilité:
+* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
+* Fonction qui filtre les voitures selon la couleur.
+@param {*} json
+@param {*} couleur
+@returns json_format
+*/
+function filterByColor(json, couleur) {
+    return json.filter(function (voiture) {
+        return voiture.couleur === couleur;
+    });
+}
+
+//------------SEPARATION DOMAINE IMPURE------------
 
 /**
  * Fonctions d’ordre supérieur:
@@ -104,35 +135,6 @@ function filterByMarqueOrPrice(json, value, callback) {
     return callback(json, value);
 
 }
-
-/**
-* Fonctions reprenant l'immutabilité:
-* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
-Fonction qui filtre les voitures selon l'année.
-@param {*} json
-@param {*} annee
-@returns json_format
-*/
-function filterByYear(json, annee) {
-    return json.filter(function (voiture) {
-        return voiture.annee === annee;
-    });
-}
-
-/**
-* Fonctions reprenant l'immutabilité:
-* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
-* Fonction qui filtre les voitures selon la couleur.
-@param {*} json
-@param {*} couleur
-@returns json_format
-*/
-function filterByColor(json, couleur) {
-    return json.filter(function (voiture) {
-        return voiture.couleur === couleur;
-    });
-}
-
 
 // voiture/
 router.get('/', function (req, res) {
