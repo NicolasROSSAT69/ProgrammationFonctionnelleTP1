@@ -38,6 +38,28 @@ function libelleToUpperCase(json) {
     return json;
 }
 
+//Fonction composition pure (fonction qui prend en paramètre une fonction et/ou qui renvoie une fonction)
+//cette fonction permet de filtrer les voitures selon la marque et le prix.
+function filterByMarqueAndPrice(json, marque, prix) {
+    const filteredByMarque = filterByMarque(json, marque);
+    return filterByPrice(filteredByMarque, prix);
+}
+console.log(filterByMarqueAndPrice(jsonVoiture, 'Ferrari', 40000))
+
+//Fonction composition impure (fonction qui prend en paramètre une fonction et/ou qui renvoie une fonction)
+//cette fonction permet de filtrer les voitures selon la marque et le prix.
+const saveToDatabase = (json) => {
+    //save the json data to a database
+    console.log('Saving json data to the database:', json)
+}
+
+const composedFunction = (json, marque, prix) => {
+    const filteredJson = filterByMarqueAndPrice(json, marque, prix);
+    saveToDatabase(filteredJson);
+}
+composedFunction(jsonVoiture, 'Ferrari', 40000);
+
+
 /**
  * Fonction pure:
  * Une fonction sans effet de bord (side effect).
