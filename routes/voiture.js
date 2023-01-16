@@ -105,6 +105,35 @@ function filterByMarqueOrPrice(json, value, callback) {
 
 }
 
+/**
+* Fonctions reprenant l'immutabilité:
+* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
+Fonction qui filtre les voitures selon l'année.
+@param {*} json
+@param {*} annee
+@returns json_format
+*/
+function filterByYear(json, annee) {
+    return json.filter(function (voiture) {
+        return voiture.annee === annee;
+    });
+}
+
+/**
+* Fonctions reprenant l'immutabilité:
+* Cette méthode crée une nouvelle liste, tandis que la liste d'origine reste inchangée, donc immutable.
+* Fonction qui filtre les voitures selon la couleur.
+@param {*} json
+@param {*} couleur
+@returns json_format
+*/
+function filterByColor(json, couleur) {
+    return json.filter(function (voiture) {
+        return voiture.couleur === couleur;
+    });
+}
+
+
 // voiture/
 router.get('/', function (req, res) {
 
@@ -151,5 +180,19 @@ router.get('/filtre/prix/:prix', function (req, res) {
     res.json(filterByMarqueOrPrice(jsonVoiture, req.params.prix, filterByPrice));
 
 })
+
+// voiture/filtre/annee/:annee
+router.get('/filtre/annee/:annee', function(req, res) {
+    var annee = req.params.annee;
+    var filteredCars = filterByYear(json, annee);
+    res.json(filteredCars);
+});
+
+// voiture/filtre/couleur/:couleur
+router.get('/filtre/couleur/:couleur', function(req, res) {
+    var couleur = req.params.couleur;
+    var filteredCars = filterByColor(json, couleur);
+    res.json(filteredCars);
+});
 
 module.exports = router;
