@@ -68,14 +68,9 @@ composedFunction(jsonVoiture, 'Ferrari', 40000);
  * @returns json_format
  */
 function libelleTolowerCase(json) {
-
-    //Convertion des valeurs en miniscule.
-    for (let i = 0; i < json.length; i++) {
-        json[i].libelle = json[i].libelle.toLowerCase();
-    }
-
-    return json;
-
+    return json.map(v => {
+        return { ...v, libelle: v.libelle.toLowerCase() };
+    });
 }
 
 /**
