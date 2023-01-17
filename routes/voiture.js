@@ -29,13 +29,9 @@ const jsonVoiture = [
  * @returns json_format
  */
 function libelleToUpperCase(json) {
-
-    //Convertion des valeurs en majuscule.
-    for (let i = 0; i < json.length; i++) {
-        json[i].libelle = json[i].libelle.toUpperCase();
-    }
-
-    return json;
+    return json.map(v => {
+        return { ...v, libelle: v.libelle.toUpperCase() };
+    });
 }
 
 //Fonction composition pure (fonction qui prend en paramètre une fonction et/ou qui renvoie une fonction)
@@ -206,14 +202,14 @@ router.get('/filtre/prix/:prix', function (req, res) {
 })
 
 // voiture/filtre/annee/:annee
-router.get('/filtre/annee/:annee', function(req, res) {
+router.get('/filtre/annee/:annee', function (req, res) {
     var annee = req.params.annee;
     var filteredCars = filterByYear(json, annee);
     res.json(filteredCars);
 });
 
 // voiture/filtre/couleur/:couleur
-router.get('/filtre/couleur/:couleur', function(req, res) {
+router.get('/filtre/couleur/:couleur', function (req, res) {
     var couleur = req.params.couleur;
     var filteredCars = filterByColor(json, couleur);
     res.json(filteredCars);
