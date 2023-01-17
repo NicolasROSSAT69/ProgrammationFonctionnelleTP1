@@ -56,19 +56,19 @@ Les fonctions concernées sont :
 - libelleToUpperCase
 - libelleTolowerCase
 
-## Immutabilité
+### Immutabilité
 
 L'immutabilité consiste à ne pas changer les données une fois qu'elles ont été créées. Au lieu de cela, une copie modifiée est créée.
 Cela peut être fait en utilisant des fonctions comme Object.assign() ou spread operator (...) pour les objets et tableaux.
 
-## Composition de fonctions (purs et impurs)
+### Composition de fonctions (purs et impurs)
 
 La composition de fonctions en JavaScript utilise plusieurs fonctions pour créer une nouvelle fonction.
 Il en existe deux types :
     -pur (pas d'effets secondaires, même résultat pour le même intrant) et  
     -impur (a des effets secondaires, le résultat peut varier). Les ingrédients purs favorisent le développement, les ingrédients impurs compliquent le développement.
 
-## Séparation entre domaines purs et impurs
+### Séparation entre domaines purs et impurs
 
 La sépartion entre domaines purs et impurs est importante !!!
 Séparer les domaines purs et impurs en JavaScript consiste à séparer les calculs (purs) des effets de bord (impurs) dans le code. Les fonctions pures prennent des entrées et retournent des résultats, sans effets de bord. Les fonctions impures produisent des effets de bord. Cela facilite la compréhension et les tests.
